@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 
 class NavigationCard extends StatelessWidget {
-  const NavigationCard({super.key, required this.index});
+  const NavigationCard({
+    super.key,
+    required this.index,
+  });
 
   final int index;
 
@@ -28,7 +31,7 @@ class NavigationCard extends StatelessWidget {
             child: const Icon(
               Icons.delete,
               size: 16,
-              color: Colors.grey,
+              color: Colors.redAccent,
             ),
           ),
         ],
