@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:postman_clone/screens/home_screen.dart';
+import 'package:postman_clone/screens/home/home_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -11,6 +11,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Flutter Postman Clone',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
