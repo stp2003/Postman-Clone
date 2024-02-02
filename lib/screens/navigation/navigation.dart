@@ -1,13 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:postman_clone/screens/navigation/widgets/navigation_card.dart';
 
-class NavigationPanel extends StatelessWidget {
+import '../../controller/navigation_controller.dart';
+import '../../providers/providers.dart';
+
+class NavigationPanel extends ConsumerWidget {
   const NavigationPanel({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final openRequests = ref.watch(requestListProvider);
+
     return SizedBox(
-      width: 200.0,
+      width: 200,
       child: Container(
         color: Colors.blue.shade100,
         child: Column(
@@ -15,26 +21,25 @@ class NavigationPanel extends StatelessWidget {
             MaterialButton(
               padding: const EdgeInsets.all(20.0),
               color: Colors.blue.shade400,
-              onPressed: () {},
+              onPressed: () {
+                ref.read(navigationControllerProvider).addNewRequest();
+              },
               child: const Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(
-                    "New Tab",
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      letterSpacing: 0.5,
-                    ),
-                  ),
+                  Text("New Tab"),
                   Icon(Icons.add),
                 ],
               ),
             ),
             Flexible(
               child: ListView.builder(
-                itemCount: 10,
+                itemCount: openRequests.length,
                 itemBuilder: (context, index) {
-                  return const NavigationCard(index: 5);
+                  return NavigationCard(
+                    request: openRequests[index],
+                    index: index,
+                  );
                 },
               ),
             ),

@@ -28,7 +28,7 @@ class ResponseView extends StatelessWidget {
     }
 
     final controller = CodeController(
-      text: '''{'key':'value'}''',
+      text: responseString,
       language: json,
     );
 

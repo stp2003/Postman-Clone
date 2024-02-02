@@ -1,37 +1,52 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class NavigationCard extends StatelessWidget {
+import '../../../controller/navigation_controller.dart';
+import '../../../models/request_model.dart';
+import '../../../providers/providers.dart';
+
+class NavigationCard extends ConsumerWidget {
   const NavigationCard({
     super.key,
+    required this.request,
     required this.index,
   });
 
+  final Request request;
   final int index;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final seleted = ref.watch(selectedRequestIndexProvider) == index;
+
     return MaterialButton(
       elevation: 0.0,
-      onPressed: () {},
+      onPressed: () {
+        ref.read(navigationControllerProvider).selectRequest(index: index);
+      },
       padding: const EdgeInsets.all(20.0),
-      color: Colors.grey.shade300,
+      color: seleted ? Colors.white : Colors.grey.shade300,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          const Text(
-            'Request',
-            style: TextStyle(fontSize: 14),
+          Text(
+            request.name,
+            style: const TextStyle(fontSize: 14),
           ),
-          const Text(
-            'GET',
-            style: TextStyle(fontSize: 12),
+          Text(
+            request.type.value,
+            style: const TextStyle(fontSize: 12),
           ),
           InkWell(
-            onTap: () {},
+            onTap: () {
+              ref
+                  .read(navigationControllerProvider)
+                  .deleteRequest(index: index);
+            },
             child: const Icon(
               Icons.delete,
               size: 16,
-              color: Colors.redAccent,
+              color: Colors.orangeAccent,
             ),
           ),
         ],

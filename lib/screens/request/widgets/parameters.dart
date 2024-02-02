@@ -1,26 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_code_editor/flutter_code_editor.dart';
 import 'package:flutter_highlight/themes/a11y-light.dart';
-import 'package:highlight/languages/json.dart' show json;
 
 class ParametersView extends StatelessWidget {
   const ParametersView({
     super.key,
     required this.body,
     required this.onChanged,
-    //required this.controller,
+    required this.controller,
   });
 
   final String body;
   final Function(String) onChanged;
-  //final CodeController controller;
+  final CodeController controller;
 
   @override
   Widget build(BuildContext context) {
-    final controller = CodeController(
-      text: '''{'key':'value'}''',
-      language: json,
-    );
     return Container(
       decoration: BoxDecoration(
         border: Border.all(color: Colors.grey),
