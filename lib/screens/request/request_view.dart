@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:postman_clone/screens/request/widgets/parameters.dart';
+import 'package:postman_clone/screens/request/widgets/response.dart';
 
 class RequestView extends StatefulWidget {
   const RequestView({super.key});
@@ -69,6 +71,17 @@ class _RequestViewState extends State<RequestView> {
             ],
           ),
           const SizedBox(height: 20.0),
+          Expanded(
+            child: Row(
+              children: [
+                Expanded(
+                  child: ParametersView(body: 'body', onChanged: (value) {}),
+                ),
+                const SizedBox(width: 20.0),
+                const Expanded(child: ResponseView(response: 'GEt')),
+              ],
+            ),
+          ),
         ],
       ),
     );
