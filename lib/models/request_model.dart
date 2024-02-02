@@ -26,7 +26,7 @@ class Request {
 
   Request({
     String? existingId,
-    this.url = "http://dartbucket.com",
+    this.url = "https://dummyjson.com/products",
     this.body = "",
     this.response = "",
     this.responseCode = 200,
