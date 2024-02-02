@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:postman_clone/screens/navigation/navigation.dart';
 import 'package:postman_clone/screens/request/request_view.dart';
+import 'package:postman_clone/utils/colors.dart';
 
 import '../../providers/providers.dart';
 
@@ -11,6 +12,7 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: bgColor,
       body: Row(
         children: [
           const NavigationPanel(),
@@ -20,7 +22,15 @@ class HomeScreen extends StatelessWidget {
                 final selectedIndex = ref.watch(selectedRequestIndexProvider);
                 if (selectedIndex == -1) {
                   return const Center(
-                    child: Text("No request selected"),
+                    child: Text(
+                      "No request selected",
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 17.0,
+                        fontWeight: FontWeight.bold,
+                        letterSpacing: 0.8,
+                      ),
+                    ),
                   );
                 }
 

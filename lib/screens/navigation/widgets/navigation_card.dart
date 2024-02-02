@@ -25,17 +25,28 @@ class NavigationCard extends ConsumerWidget {
         ref.read(navigationControllerProvider).selectRequest(index: index);
       },
       padding: const EdgeInsets.all(20.0),
-      color: seleted ? Colors.white : Colors.grey.shade300,
+      color: seleted ? Colors.black26 : Colors.black54,
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
-          Text(
-            request.name,
-            style: const TextStyle(fontSize: 14),
+          Expanded(
+            child: Text(
+              request.name,
+              style: const TextStyle(fontSize: 14, color: Colors.white),
+              softWrap: true,
+            ),
           ),
-          Text(
-            request.type.value,
-            style: const TextStyle(fontSize: 12),
+          const SizedBox(width: 20.0),
+          Expanded(
+            child: Text(
+              request.type.value,
+              style: const TextStyle(
+                fontSize: 15.0,
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+              ),
+              softWrap: true,
+            ),
           ),
           InkWell(
             onTap: () {
@@ -46,7 +57,7 @@ class NavigationCard extends ConsumerWidget {
             child: const Icon(
               Icons.delete,
               size: 16,
-              color: Colors.orangeAccent,
+              color: Colors.red,
             ),
           ),
         ],

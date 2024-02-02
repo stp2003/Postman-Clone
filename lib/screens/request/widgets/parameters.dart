@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_code_editor/flutter_code_editor.dart';
-import 'package:flutter_highlight/themes/a11y-light.dart';
+import 'package:flutter_highlight/themes/a11y-dark.dart';
 
 class ParametersView extends StatelessWidget {
   const ParametersView({
@@ -26,11 +26,19 @@ class ParametersView extends StatelessWidget {
         children: [
           const Padding(
             padding: EdgeInsets.all(10.0),
-            child: Text("Parameters"),
+            child: Text(
+              "Parameters",
+              style: TextStyle(
+                color: Colors.white,
+                letterSpacing: 0.8,
+                fontWeight: FontWeight.bold,
+                fontSize: 20.0,
+              ),
+            ),
           ),
           Flexible(
             child: CodeTheme(
-              data: CodeThemeData(styles: a11yLightTheme),
+              data: CodeThemeData(styles: a11yDarkTheme),
               child: CodeField(
                 onChanged: onChanged,
                 gutterStyle: GutterStyle.none,

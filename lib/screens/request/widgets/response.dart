@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_code_editor/flutter_code_editor.dart';
-import 'package:flutter_highlight/themes/a11y-light.dart';
+import 'package:flutter_highlight/themes/a11y-dark.dart';
 import 'package:highlight/languages/json.dart' show json;
 
 class ResponseView extends StatelessWidget {
@@ -42,11 +42,19 @@ class ResponseView extends StatelessWidget {
         children: [
           const Padding(
             padding: EdgeInsets.all(10.0),
-            child: Text("Response"),
+            child: Text(
+              "Response",
+              style: TextStyle(
+                color: Colors.white,
+                letterSpacing: 0.8,
+                fontWeight: FontWeight.bold,
+                fontSize: 20.0,
+              ),
+            ),
           ),
           Flexible(
             child: CodeTheme(
-              data: CodeThemeData(styles: a11yLightTheme),
+              data: CodeThemeData(styles: a11yDarkTheme),
               child: CodeField(
                 gutterStyle: GutterStyle.none,
                 controller: controller,

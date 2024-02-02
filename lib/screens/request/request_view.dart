@@ -4,13 +4,17 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:highlight/languages/json.dart' show json;
 import 'package:postman_clone/screens/request/widgets/parameters.dart';
 import 'package:postman_clone/screens/request/widgets/response.dart';
+import 'package:postman_clone/utils/colors.dart';
 
 import '../../controller/request_controller.dart';
 import '../../models/request_model.dart';
 import '../../providers/providers.dart';
 
 class RequestView extends ConsumerStatefulWidget {
-  const RequestView({super.key, required this.id});
+  const RequestView({
+    super.key,
+    required this.id,
+  });
 
   final String id;
 
@@ -24,9 +28,13 @@ class _RequestViewState extends ConsumerState<RequestView> {
   @override
   void initState() {
     super.initState();
-    final request = ref.read(requestListProvider.select((value) {
-      return value.firstWhere((element) => element.id == widget.id);
-    }));
+    final request = ref.read(
+      requestListProvider.select(
+        (value) {
+          return value.firstWhere((element) => element.id == widget.id);
+        },
+      ),
+    );
 
     bodyController = CodeController(
       text: request.body,
@@ -36,16 +44,20 @@ class _RequestViewState extends ConsumerState<RequestView> {
 
   @override
   Widget build(BuildContext context) {
-    final request = ref.watch(requestListProvider.select((value) {
-      return value.firstWhere((element) => element.id == widget.id);
-    }));
+    final request = ref.watch(
+      requestListProvider.select(
+        (value) {
+          return value.firstWhere((element) => element.id == widget.id);
+        },
+      ),
+    );
 
     return Container(
       padding: const EdgeInsets.all(20.0),
       child: Column(
         children: [
           TextFormField(
-            style: const TextStyle(fontSize: 20),
+            style: const TextStyle(fontSize: 20, color: Colors.white),
             initialValue: request.name,
             decoration: const InputDecoration(border: InputBorder.none),
             onChanged: (value) {
@@ -61,19 +73,23 @@ class _RequestViewState extends ConsumerState<RequestView> {
                 padding: const EdgeInsets.all(1.5),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(5.0),
-                  color: Colors.grey.shade300,
+                  color: cardColor,
                 ),
                 child: DropdownButton(
                   underline: const SizedBox.shrink(),
-                  style: TextStyle(fontSize: 16, color: Colors.grey.shade900),
+                  style: const TextStyle(fontSize: 16),
                   value: request.type,
+                  dropdownColor: appBarColor,
                   items: RequestType.values
                       .map(
                         (e) => DropdownMenuItem(
                           value: e,
                           child: Padding(
                             padding: const EdgeInsets.all(8.0),
-                            child: Text(e.value),
+                            child: Text(
+                              e.value,
+                              style: const TextStyle(color: Colors.white),
+                            ),
                           ),
                         ),
                       )
@@ -85,9 +101,10 @@ class _RequestViewState extends ConsumerState<RequestView> {
                   },
                 ),
               ),
-              const SizedBox(width: 5.0),
+              const SizedBox(width: 10.0),
               Flexible(
                 child: TextFormField(
+                  style: const TextStyle(fontSize: 20, color: Colors.white),
                   initialValue: request.url,
                   decoration: const InputDecoration(
                     border: OutlineInputBorder(),
@@ -99,9 +116,13 @@ class _RequestViewState extends ConsumerState<RequestView> {
                   },
                 ),
               ),
+              const SizedBox(width: 10.0),
               MaterialButton(
                 padding: const EdgeInsets.all(25.0),
-                color: Colors.blue,
+                color: Colors.deepOrange,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10.0),
+                ),
                 onPressed: () {
                   ref
                       .read(requestControllerProvider)
@@ -109,7 +130,12 @@ class _RequestViewState extends ConsumerState<RequestView> {
                 },
                 child: const Text(
                   "SEND",
-                  style: TextStyle(color: Colors.white),
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 16.0,
+                    letterSpacing: 0.8,
+                  ),
                 ),
               ),
             ],
